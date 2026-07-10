@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find . -not -path '*/\\\\.*' -type f)",
+      "Bash(awk '{print $9, \"\\(\" $5 \"\\)\"}')",
+      "Bash(dir /s /b)",
+      "Bash(findstr /v \"node_modules\")",
+      "Bash(npm install *)",
+      "Bash(curl -s -X POST http://localhost:3000/api/generate-keywords -H 'Content-Type: application/json' -d '{ *)",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -X POST http://localhost:3000/api/generate-banner -H 'Content-Type: application/json' -d '{\"bannerPrompt\":\"Test Banner\",\"bannerStyle\":\"Modern\",\"colorPreference\":\"#6f3aea\",\"bannerSize\":\"1200x400\"}' -o /tmp/banner.png)",
+      "Read(//tmp/**)",
+      "Bash(curl -X POST http://localhost:3000/api/generate-banner -H 'Content-Type: application/json' -d '{\"bannerPrompt\":\"AI Automation Mastery - Learn to build income systems with no-code tools\",\"bannerStyle\":\"Modern\",\"colorPreference\":\"#6f3aea\",\"bannerSize\":\"1200x400\"}' -o banner-purple.png)",
+      "Bash(curl -X POST http://localhost:3000/api/generate-banner -H 'Content-Type: application/json' -d '{\"bannerPrompt\":\"Skool Community Mastery - Build engaged and thriving communities\",\"bannerStyle\":\"Modern\",\"colorPreference\":\"#ff9500\",\"bannerSize\":\"1200x400\"}' -o banner-orange.png)",
+      "Bash(rm -f banner-*.png && echo \"Test banners cleaned up\")",
+      "Bash(curl -s -X POST http://localhost:3000/api/generate-banner -H 'Content-Type: application/json' -d '{\"bannerPrompt\":\"Skool Community Mastery - Build engaged communities\",\"bannerStyle\":\"modern\",\"colorPreference\":\"#6f3aea\",\"bannerSize\":\"1200x400\"}' -o test_banner.png)",
+      "Bash(curl -s http://localhost:3000/logo.svg)",
+      "Bash(curl -s http://localhost:3000/ -o /dev/null -w \"%{http_code}\\\\n\")"
+    ]
+  }
+}
