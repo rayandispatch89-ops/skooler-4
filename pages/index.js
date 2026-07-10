@@ -21,17 +21,10 @@ export default function Landing() {
   const [strategyLoading, setStrategyLoading] = useState(false)
   const [strategyError, setStrategyError] = useState('')
   const [strategyResult, setStrategyResult] = useState(null)
-  const [selectedFeatures, setSelectedFeatures] = useState([])
 
   const handleStrategyChange = (e) => {
     const { name, value } = e.target
     setStrategyForm((prev) => ({ ...prev, [name]: value }))
-  }
-
-  const handleFeatureToggle = (title) => {
-    setSelectedFeatures((prev) =>
-      prev.includes(title) ? prev.filter((feature) => feature !== title) : [...prev, title]
-    )
   }
 
   const handleStrategySubmit = async (e) => {
@@ -44,7 +37,7 @@ export default function Landing() {
       const response = await fetch('/api/generate-strategy', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...strategyForm, selectedFeatures })
+        body: JSON.stringify(strategyForm)
       })
 
       const data = await response.json()
@@ -101,19 +94,6 @@ export default function Landing() {
     'abdullah987570@gmail.com',
     'ashfaqawan90op@gmail.com',
     'rayan.dispatch89@gmail.com'
-  ]
-
-  const featureOptions = [
-    'Create Valuable Content',
-    'Short-Form Video Content',
-    'SEO Blog Articles',
-    'YouTube Tutorials',
-    'Email Newsletter',
-    'Referral Program',
-    'Host Free Webinars',
-    'Community Challenges',
-    'Guest Appearances',
-    'Partnerships'
   ]
   const isAdmin = !loading && isAuthenticated && ADMIN_EMAILS.includes(user?.email)
 
@@ -451,25 +431,6 @@ export default function Landing() {
                   </select>
                 </div>
               </div>
-
-              <div className="rounded-[28px] border border-slate-200 bg-slate-50 p-5">
-                <p className="text-sm text-slate-500 mb-4">Choose the features to include in your generated strategy.</p>
-                <div className="space-y-3">
-                  {featureOptions.map((feature) => (
-                    <label key={feature} className="flex items-center gap-3 rounded-2xl border border-transparent px-4 py-3 cursor-pointer text-sm font-medium text-slate-700 hover:border-slate-300 transition">
-                      <input
-                        type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-[#5b3fff] focus:ring-[#5b3fff]"
-                        checked={selectedFeatures.includes(feature)}
-                        onChange={() => handleFeatureToggle(feature)}
-                      />
-                      <span className="text-slate-400">★</span>
-                      <span className={selectedFeatures.includes(feature) ? 'text-[#5b3fff]' : 'text-slate-700'}>{feature}</span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
               <button type="submit" disabled={strategyLoading} className="w-full inline-flex items-center justify-center rounded-full bg-[#5b3fff] px-8 py-3.5 text-sm font-semibold text-white shadow-[0_24px_80px_rgba(91,63,255,0.20)] transition duration-300 hover:bg-[#4b39f9] disabled:opacity-60">
                 {strategyLoading ? 'Generating...' : 'Generate Strategy Now'}
               </button>
